@@ -1,0 +1,33 @@
+backend:
+  image: products-backend
+  tag: latest
+  replicas: 2
+  port: 3001
+
+web:
+  image: products-web
+  tag: latest
+  replicas: 2
+  port: 80
+
+db:
+  user: postgres
+  database: products
+
+postgresql:
+  enabled: true
+  auth:
+    postgresPassword: secret
+    database: products
+  primary:
+    persistence:
+      enabled: true
+      size: 1Gi
+  image:
+    registry: docker.io
+    repository: bitnamilegacy/postgresql
+    tag: 17.6.0
+
+global:
+  security:
+    allowInsecureImages: true
