@@ -1,0 +1,17 @@
+# ---- Ingress: the front door from outside the cluster into the web Service ----
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-ingress
+spec:
+  ingressClassName: traefik      # Traefik ships built-in with Rancher Desktop's k3s
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: web
+                port:
+                  number: 80
